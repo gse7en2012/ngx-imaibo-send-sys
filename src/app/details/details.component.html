@@ -1,0 +1,167 @@
+<!-- <mat-card>
+  <mat-card-content>
+      <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile
+              *ngFor="let tile of tiles"
+              [colspan]="tile.cols"
+              [rowspan]="tile.rows"
+              [style.background]="tile.color">
+            {{tile.text}}
+          </mat-grid-tile>
+        </mat-grid-list>
+  </mat-card-content>
+</mat-card> -->
+
+
+<mat-card class="example-card details-card">
+  <mat-card-header>
+    <a mat-raised-button color="basic" [routerLink]="['../../search']">返回</a>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row-header">
+      <div class="item">
+        <p>用户昵称：{{details.bMbNickName}}</p>
+        <p>开户时间：{{details.registrationDate}}</p>
+      </div>
+      <div class="item">
+        <p>入金时间：{{details.firstPositionDate}}</p>
+        <p>累计入金：{{details.totalDeposits}}</p>
+      </div>
+      <div class="item">
+        <p>首笔交易：{{details.firstTradingDate}}</p>
+        <p>累计笔数：{{details.totalTrades}}</p>
+      </div>
+      <div class="item">
+        <p>满$10时间：{{details.tendollarsQuotaDate}}</p>
+        <p>CPA达标时间：{{details.cpaQuotaDate}}</p>
+      </div>
+      <div class="item flex2">
+        <p>优惠政策：{{details.policy}}</p>
+        <p>{{details.policyDes}}</p>
+      </div>
+    </div>
+    <div class="row-content">
+      <div class="item flex3">
+        <div class="row">
+          <div class="heng">
+            <span>用户昵称：{{details.bMbNickName}} </span>
+            <span>用户ID：{{details.bMbUid}} </span>
+            <span>用户角色：{{details.bRole}} </span>
+            <span>用户电话：{{details.bPhone}}</span>
+          </div>
+          <div class="heng">
+            <span>首笔奖励：{{details.bFirstPrize}}</span>
+            <span>
+              <img src="assets/img/red.png" class="icon" *ngIf="details.bFirstPrizeStatus==0">
+              <b *ngIf="details.bFirstPrizeStatus==0">未奖励</b>
+              <img src="assets/img/blue.png" class="icon" *ngIf="details.bFirstPrizeStatus==1">
+              <b *ngIf="details.bFirstPrizeStatus==1">奖励完毕</b>
+              <img src="assets/img/ban.png" class="icon" *ngIf="details.bFirstPrizeStatus==2">
+              <b *ngIf="details.bFirstPrizeStatus==2">取消奖励</b>
+            </span>
+            <span>
+              <button mat-raised-button color="primary" *ngIf="details.bFirstPrizeStatus==0" (click)="openDialog('被推荐人'+details.bMbNickName+'首笔奖励：',details.bFirstPrize,'b1')">操作</button>
+              <b *ngIf="details.bFirstPrizeStatus==1">操作时间：{{details.bFirstCostTime}}<br>生成单号：{{details.bFirstCostCode}}</b>
+              <b *ngIf="details.bFirstPrizeStatus==2">&nbsp;</b>
+            </span>
+          </div>
+          <div class="heng">
+            <span>二笔奖励：{{details.bSecondPrize}}</span>
+            <span>
+              <img src="assets/img/red.png" class="icon" *ngIf="details.bSecondPrizeStatus==0">
+              <b *ngIf="details.bSecondPrizeStatus==0">未奖励</b>
+              <img src="assets/img/blue.png" class="icon" *ngIf="details.bSecondPrizeStatus==1">
+              <b *ngIf="details.bSecondPrizeStatus==1">奖励完毕</b>
+              <img src="assets/img/ban.png" class="icon" *ngIf="details.bSecondPrizeStatus==2">
+              <b *ngIf="details.bSecondPrizeStatus==2">取消奖励</b>
+            </span>
+            <span>
+              <button mat-raised-button color="primary" *ngIf="details.bSecondPrizeStatus==0" (click)="openDialog('被推荐人'+details.bMbNickName+'二笔奖励：',details.bSecondPrize,'b2')">操作</button>
+              <b *ngIf="details.bSecondPrizeStatus==1">操作时间：{{details.bSecondCostTime}}<br>生成单号：{{details.bSecondCostCode}}</b>
+              <b *ngIf="details.bSecondPrizeStatus==2">&nbsp;</b>
+            </span>
+          </div>
+          <div class="heng">
+            <span class="other-prize">其他奖励：{{details.bOtherPrize}}</span>
+            <span>
+              <img src="assets/img/red.png" class="icon" *ngIf="details.bOtherPrizeStatus==0">
+              <b *ngIf="details.bOtherPrizeStatus==0">未奖励</b>
+              <img src="assets/img/blue.png" class="icon" *ngIf="details.bOtherPrizeStatus==1">
+              <b *ngIf="details.bOtherPrizeStatus==1">奖励完毕</b>
+              <img src="assets/img/ban.png" class="icon" *ngIf="details.bOtherPrizeStatus==2">
+              <b *ngIf="details.bOtherPrizeStatus==2">取消奖励</b>
+            </span>
+            <span>
+              <button mat-raised-button color="primary" *ngIf="details.bOtherPrizeStatus==0" (click)="openDialog('被推荐人'+details.bMbNickName+'其他奖励：',details.bOtherPrize,'b3')">操作</button>
+              <b *ngIf="details.bOtherPrizeStatus==1">&nbsp;&nbsp;</b>
+              <b *ngIf="details.bOtherPrizeStatus==2">&nbsp;</b>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="heng">
+            <span>推荐人昵称：{{details.aMbNickName}} </span>
+            <span>推荐人ID：{{details.aMbUid}} </span>
+            <span>推荐人角色：{{details.aRole}} </span>
+            <span>推荐人电话：{{details.aPhone}}</span>
+          </div>
+          <div class="heng">
+            <span>首笔奖励：{{details.aFirstPrize}}</span>
+            <span>
+              <img src="assets/img/red.png" class="icon" *ngIf="details.aFirstPrizeStatus==0">
+              <b *ngIf="details.aFirstPrizeStatus==0">未奖励</b>
+              <img src="assets/img/blue.png" class="icon" *ngIf="details.aFirstPrizeStatus==1">
+              <b *ngIf="details.aFirstPrizeStatus==1">奖励完毕</b>
+              <img src="assets/img/ban.png" class="icon" *ngIf="details.aFirstPrizeStatus==2">
+              <b *ngIf="details.aFirstPrizeStatus==2">取消奖励</b>
+            </span>
+            <span>
+              <button mat-raised-button color="primary" *ngIf="details.aFirstPrizeStatus==0" (click)="openDialog('推荐人'+details.aMbNickName+'首笔奖励：',details.aFirstPrize,'a1')">操作</button>
+              <b *ngIf="details.aFirstPrizeStatus==1">操作时间：{{details.aFirstCostTime}}<br>生成单号：{{details.aFirstCostCode}}</b>
+              <b *ngIf="details.aFirstPrizeStatus==2">&nbsp;</b>
+            </span>
+          </div>
+          <div class="heng">
+            <span>二笔奖励：{{details.aSecondPrize}}</span>
+            <span>
+              <img src="assets/img/red.png" class="icon" *ngIf="details.aSecondPrizeStatus==0">
+              <b *ngIf="details.aSecondPrizeStatus==0">未奖励</b>
+              <img src="assets/img/blue.png" class="icon" *ngIf="details.aSecondPrizeStatus==1">
+              <b *ngIf="details.aSecondPrizeStatus==1">奖励完毕</b>
+              <img src="assets/img/ban.png" class="icon" *ngIf="details.aSecondPrizeStatus==2">
+              <b *ngIf="details.aSecondPrizeStatus==2">取消奖励</b>
+            </span>
+            <span>
+              <button mat-raised-button color="primary" *ngIf="details.aSecondPrizeStatus==0" (click)="openDialog('推荐人'+details.aMbNickName+'二笔奖励：',details.aSecondPrize,'a2')">操作</button>
+              <b *ngIf="details.aSecondPrizeStatus==1">操作时间：{{details.aSecondCostTime}}<br>生成单号：{{details.aSecondCostCode}}</b>
+              <b *ngIf="details.aSecondPrizeStatus==2">&nbsp;</b>
+            </span>
+          </div>
+          <div class="heng">
+            <span class="other-prize">其他奖励：{{details.aOtherPrize}}</span>
+            <span>
+              <img src="assets/img/red.png" class="icon" *ngIf="details.aOtherPrizeStatus==0">
+              <b *ngIf="details.aOtherPrizeStatus==0">未奖励</b>
+              <img src="assets/img/blue.png" class="icon" *ngIf="details.aOtherPrizeStatus==1">
+              <b *ngIf="details.aOtherPrizeStatus==1">奖励完毕</b>
+              <img src="assets/img/ban.png" class="icon" *ngIf="details.aOtherPrizeStatus==2">
+              <b *ngIf="details.aOtherPrizeStatus==2">取消奖励</b>
+            </span>
+            <span>
+              <button mat-raised-button color="primary" *ngIf="details.aOtherPrizeStatus==0" (click)="openDialog('推荐人'+details.aMbNickName+'其他奖励：',details.aOtherPrize,'a3')">操作</button>
+              <b *ngIf="details.aSecondPrizeStatus==1">&nbsp;&nbsp;</b>
+              <b *ngIf="details.aSecondPrizeStatus==2">&nbsp;</b>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="item remark-item">
+        <mat-form-field>
+          <textarea matInput placeholder="备注" matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="10" [(ngModel)]="details.remark"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="saveRemark()">保存</button>
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
