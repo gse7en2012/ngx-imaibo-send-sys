@@ -14,33 +14,27 @@ import { AppService } from '../service/app.service';
 
 export class SearchComponent implements OnInit {
 
-  displayedColumns = ['id', 'bMbUid', 'mbNickName', 'policy', 'firstPositionDate', 'tendollarsQuotaDate',
-    'bFirstPrizeStatus',
-    'bSecondPrizeStatus',
-    'bOtherPrizeStatus',
-    'aFirstPrizeStatus',
-    'aSecondPrizeStatus',
-    'aOtherPrizeStatus',
-    'op',
-    'remark'
-  ];
+
   dataSource = new MatTableDataSource<SingleData>();
   data;
 
+
   public year = (new Date()).getFullYear();
   public loading:boolean=false;
-  public month;
+  public month=((new Date()).getMonth()+1)<10?'0'+((new Date()).getMonth()+1):''+((new Date()).getMonth()+1);
   public day;
   public isLeapYear: boolean = false;
   public status = '0';
   public isExecute: any = '0';
   public policyType: any = '0';
-  public keyWord;
+  public keyWord:any='';
   public page = 0;
   public pageSize = 10;
   public type = '0';
   public dataLength=0;
   public info:any={};
+
+  public exportQs:any;
 
   public yearList: number[] = [];
   public monthList: string[] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
@@ -129,7 +123,7 @@ export class SearchComponent implements OnInit {
   queryData() {
     this.data=[];
     this.loading=true;
-    this.appService.queryData({
+    const qs={
       date: [this.year,this.month,this.day].join(''),
       isExecute: this.isExecute,
       keyWord: this.keyWord,
@@ -138,8 +132,12 @@ export class SearchComponent implements OnInit {
       policyType: this.policyType,
       status: this.status,
       type: this.type
-    }).then((result)=>{
-      this.renderData(result)
+    };
+    this.appService.queryData(qs).then((result)=>{
+      this.renderData(result);
+
+      this.exportQs=Object.keys(qs).map((k)=>{return k+'='+qs[k]}).join('&')
+
     });
 
   }
@@ -169,6 +167,4 @@ export interface SingleData {
   aOtherPrizeStatus: number;
 }
 
-
-const MOCK_DATA = { "record": [{ "id": 125, "bMbUid": 4325653, "remark": null, "aFirstPrizeStatus": 0, "aSecondPrizeStatus": 0, "aOtherPrizeStatus": 0, "bFirstPrizeStatus": 0, "bSecondPrizeStatus": 0, "bOtherPrizeStatus": 0, "aFirstPrizeStatusStr": null, "aSecondPrizeStatusStr": null, "aOtherPrizeStatusStr": null, "bFirstPrizeStatusStr": null, "bSecondPrizeStatusStr": null, "bOtherPrizeStatusStr": null, "mbNickName": "游客4231409", "policy": "自然户600", "firstPositionDate": null, "tendollarsQuotaDate": null, "totalDeposits": null, "totalTrades": null }, { "id": 130, "bMbUid": 276065, "remark": null, "aFirstPrizeStatus": 0, "aSecondPrizeStatus": 0, "aOtherPrizeStatus": 0, "bFirstPrizeStatus": 0, "bSecondPrizeStatus": 0, "bOtherPrizeStatus": 0, "aFirstPrizeStatusStr": null, "aSecondPrizeStatusStr": null, "aOtherPrizeStatusStr": null, "bFirstPrizeStatusStr": null, "bSecondPrizeStatusStr": null, "bOtherPrizeStatusStr": null, "mbNickName": "波比", "policy": "自然户600", "firstPositionDate": null, "tendollarsQuotaDate": null, "totalDeposits": null, "totalTrades": null }, { "id": 128, "bMbUid": 708065, "remark": null, "aFirstPrizeStatus": 0, "aSecondPrizeStatus": 0, "aOtherPrizeStatus": 0, "bFirstPrizeStatus": 0, "bSecondPrizeStatus": 0, "bOtherPrizeStatus": 0, "aFirstPrizeStatusStr": null, "aSecondPrizeStatusStr": null, "aOtherPrizeStatusStr": null, "bFirstPrizeStatusStr": null, "bSecondPrizeStatusStr": null, "bOtherPrizeStatusStr": null, "mbNickName": "MaDDaxchann", "policy": "好友邀请600", "firstPositionDate": null, "tendollarsQuotaDate": null, "totalDeposits": null, "totalTrades": null }], "totalRows": 3, "totalPages": 1, "page": 0, "pageSize": 10, "aMolecule": 0, "aDenominator": 3, "bMolecule": 0, "bDenominator": 18, "cMolecule": 0.0, "cDenominator": 1800.0, "statusCode": "200", "token": null, "sid": null, "msg": null };
 

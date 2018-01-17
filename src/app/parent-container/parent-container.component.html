@@ -1,0 +1,30 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLinkActive="cur" [routerLink]="['search']">达标赠送管理</a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item routerLinkActive="cur" [routerLink]="['role']">用户角色管理</a>
+      
+      <mat-divider></mat-divider>
+
+
+      <a mat-list-item routerLinkActive="cur" [routerLink]="['policy']">业务政策管理</a>
+
+      <mat-divider></mat-divider>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="ctx">
+      <router-outlet></router-outlet>
+
+    </div>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

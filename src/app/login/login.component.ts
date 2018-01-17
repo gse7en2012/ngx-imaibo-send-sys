@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.appService.accountLogin(this.user, this.pass).then(() => {
       this.loading = false;
-      this.router.navigate(['/search']);
+      this.router.navigate(['/admin']);
     }).catch(e => {
       this.loading = false;
       alert(e);

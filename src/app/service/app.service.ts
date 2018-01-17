@@ -22,7 +22,11 @@ export class AppService {
     'query':'/ydt/api/bps/quotaPrize/record',
     'details':'/ydt/api/bps/quotaPrize/detail',
     'remark':'/ydt/api/bps/quotaPrize/saveRemark',
-    'award':'/ydt/api/bps/quotaPrize/confirm'
+    'award':'/ydt/api/bps/quotaPrize/confirm',
+
+    'policyList':'/ydt/api/bps/policy/findPolicy',
+    'policyLeader':'/ydt/api/bps/user/findLeader'
+
   };
 
 
@@ -129,4 +133,14 @@ export class AppService {
     return this.gsevenRequestViaPost('award',opts);
   }
 
+
+  getPolicyList(opts){
+    return this.gsevenRequestViaGet('policyList',opts)
+  }
+
+
+  getPolicyLeader(){
+    return this.gsevenRequestViaGet('policyLeader',{})
+    
+  }
 }

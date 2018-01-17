@@ -1,0 +1,114 @@
+<div class="policy-sys-list">
+  <mat-card class="example-card query-card">
+    <mat-card-content>
+      <div class="example-container">
+
+        <mat-form-field class="field-item">
+          <mat-select placeholder="政策信息" [(value)]="type">
+            <!-- <mat-option>无</mat-option> -->
+            <mat-option value="0">政策编号</mat-option>
+            <mat-option value="1">政策名称</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width:180px;">
+          <input matInput placeholder="关键字" [(ngModel)]="keyWord">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="queryData()">搜索</button>
+
+        <mat-form-field class="field-item" style="margin-left:50px;">
+          <mat-select placeholder="政策类型" [(value)]="policyType">
+            <!-- <mat-option>无</mat-option> -->
+            <mat-option value="0">全部</mat-option>
+            <mat-option value="1">代理商政策</mat-option>
+            <mat-option value="2">其他类型政策</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="field-item" style="width:180px;">
+          <mat-select placeholder="负责人" [(ngModel)]="policyHolder">
+            <!-- <mat-option>无</mat-option> -->
+            <mat-option [value]="item.id" *ngFor="let item of leader" >{{item.name}}</mat-option>
+            <!-- <mat-option value="0">全部</mat-option>
+            <mat-option value="1">名称</mat-option> -->
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="queryData()">搜索</button>
+
+        <button mat-raised-button color="accent" (click)="queryData()" class="new-policy-btn">新增政策</button>
+
+
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <mat-card class="example-card">
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+
+
+      <mat-toolbar color="basic" class="result-title">
+        查询结果
+      </mat-toolbar>
+
+
+
+      <table class="table">
+        <tr class="header">
+          <td rowspan="2">政策编号</td>
+          <td rowspan="2">政策名称</td>
+          <td rowspan="2">所属业务</td>
+          <td rowspan="2">推荐人角色</td>
+          <td colspan="3">用户奖励</td>
+          <td colspan="3">推荐人奖励</td>
+          <td rowspan="2">负责人</td>
+          <td rowspan="2">操作</td>
+        </tr>
+        <tr class="header">
+          <td>首笔</td>
+          <td>二笔</td>
+          <td>其他</td>
+          <td>首笔</td>
+          <td>二笔</td>
+          <td>其他</td>
+        </tr>
+        <tr *ngFor="let item of data">
+          <td>{{item.code}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.businessName}}</td>
+          <td>{{item.roles}}</td>
+          <td>{{item.bFirstPrize||'--'}} </td>
+          <td>{{item.bSecondPrize||'--'}}</td>
+          <td>{{item.bOtherPrize||'--'}} </td>
+          <td>{{item.aFirstPrize||'--'}}</td>
+          <td>{{item.aSecondPrize||'--'}} </td>
+          <td>{{item.aOtherPrize||'--'}}</td>
+          <td>{{item.leaderName}}</td>
+          <td>
+            <a mat-button color="primary">查看详情</a>
+          </td>
+        </tr>
+        <tr *ngIf="loading">
+          <td colspan="12">
+            <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate"></mat-progress-spinner>
+          </td>
+        </tr>
+        <tr *ngIf="data.length==0&&!loading">
+          <td colspan="12">
+            暂无数据
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [length]="dataLength" (page)="pageEvent($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+
+
+
+</div>

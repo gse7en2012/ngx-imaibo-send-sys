@@ -13,30 +13,40 @@ import { MyOwnCustomMaterialModuleModule } from './my-own-custom-material-module
 import { AppService } from './service/app.service';
 
 import { AppComponent } from './app.component';
-import { FlexSampleComponent } from './flex-sample/flex-sample.component';
 import { LoginComponent } from './login/login.component';
-import { SearchComponent } from './search/search.component';
-import { DetailsComponent, DialogOverviewExampleDialog } from './details/details.component';
+import { SearchComponent } from './send-sys-search/search.component';
+import { DetailsComponent, DialogOverviewExampleDialog } from './send-sys-details/details.component';
 
 import { AuthGuard } from './auth-guard';
+import { ParentContainerComponent } from './parent-container/parent-container.component';
+import { PolicySysListComponent } from './policy-sys-list/policy-sys-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
-  { path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
+const adminRoutes: Routes = [
+  {
+    path: 'admin', component: ParentContainerComponent, children: [
+      { path: '', redirectTo: 'search', pathMatch: 'full' },
+      { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+      { path: 'search/details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
+      { path: 'policy', component: PolicySysListComponent, canActivate: [AuthGuard] },
+    ]
+  }
+]
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlexSampleComponent,
     LoginComponent,
     SearchComponent,
     DetailsComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    ParentContainerComponent,
+    PolicySysListComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +57,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CookieModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    RouterModule.forChild(adminRoutes),
   ],
   providers: [AppService, AuthGuard],
   entryComponents: [DetailsComponent, DialogOverviewExampleDialog],

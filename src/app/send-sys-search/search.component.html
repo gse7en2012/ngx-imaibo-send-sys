@@ -1,0 +1,168 @@
+<div class="send-sys-search">
+  <mat-card class="example-card query-card">
+    <mat-card-content>
+      <div class="example-container bb">
+        <mat-form-field class="field-item">
+          <mat-select placeholder="年" [(ngModel)]="year" (change)="changeYear()">
+            <mat-option>无</mat-option>
+            <mat-option [value]="y" *ngFor="let y of yearList">{{y}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="月" [(ngModel)]="month" (change)="changeMonth()">
+            <mat-option>无</mat-option>
+            <mat-option [value]="m" *ngFor="let m of monthList">{{m}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="日" [(ngModel)]="day" (openedChange)="openDaySelect()">
+            <mat-option>无</mat-option>
+            <mat-option [value]="d" *ngFor="let d of dayList">{{d}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="状态" [(value)]="status">
+            <!-- 0：全部 / 1：未达标 / 2：已入金 / -->
+            <mat-option value="0">全部</mat-option>
+            <mat-option value="1">未达标</mat-option>
+            <mat-option value="2">已入金</mat-option>
+            <mat-option value="3">满$10</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="是否执行" [(value)]="isExecute">
+            <mat-option value="0">全部</mat-option>
+            <mat-option value="1">执行完毕</mat-option>
+            <mat-option value="2">待执行</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="政策" [(value)]="policyType">
+            <mat-option value="0">全部</mat-option>
+            <mat-option value="1">代理商政策</mat-option>
+            <mat-option value="2">其他政策</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="queryData()">按所选条件查询</button>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="类别" [(value)]="type">
+            <mat-option>无</mat-option>
+            <mat-option value="0">投资脉搏UID</mat-option>
+            <mat-option value="1">手机号码</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="关键字" [(ngModel)]="keyWord">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="queryData()">用户查询</button>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <mat-card class="example-card">
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+      <div class="example-container icon-box">
+        <label class="icon-item">
+          <img src="assets/img/red.png">未奖励</label>
+        <label class="icon-item">
+          <img src="assets/img/blue.png">奖励完毕</label>
+        <label class="icon-item">
+          <img src="assets/img/ban.png">取消奖励</label>
+        <a mat-raised-button color="primary" class="export-btn" href="/ydt/api/bps/quotaPrize/export?{{exportQs}}">导出excel</a>
+      </div>
+
+      <mat-toolbar color="basic" class="result-title">
+        查询结果
+      </mat-toolbar>
+
+      <p style="padding: 10px;">序号进度： {{info.aMolecule}}/{{info.aDenominator}} 操作进度： {{info.bMolecule}}/{{info.bDenominator}} 金额进度： {{info.cMolecule}}/{{info.cDenominator}}
+        （“其他奖励”“取消奖励”不统计）
+      </p>
+      <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+
+      <table class="table">
+        <tr class="header">
+          <td rowspan="2">序号</td>
+          <td rowspan="2">用户id</td>
+          <td rowspan="2">昵称</td>
+          <td rowspan="2">政策</td>
+          <td rowspan="2">入金日期</td>
+          <td rowspan="2">满$10日期</td>
+          <td colspan="3">用户奖励</td>
+          <td colspan="3">推荐人奖励</td>
+          <td rowspan="2">操作</td>
+          <td rowspan="2">备注</td>
+        </tr>
+        <tr class="header">
+          <td>首笔</td>
+          <td>二笔</td>
+          <td>其他</td>
+          <td>首笔</td>
+          <td>二笔</td>
+          <td>其他</td>
+        </tr>
+        <tr *ngFor="let item of data">
+          <td>{{item.id}}</td>
+          <td>{{item.bMbUid}}</td>
+          <td>{{item.mbNickName}}</td>
+          <td>{{item.policy}}</td>
+          <td>{{item.firstPositionDate}}</td>
+          <td>{{item.tendollarsQuotaDate}}</td>
+          <td>
+            <img src="assets/img/red.png" class="icon" *ngIf="item.bFirstPrizeStatus==0">
+            <img src="assets/img/blue.png" class="icon" *ngIf="item.bFirstPrizeStatus==1">
+            <img src="assets/img/ban.png" class="icon" *ngIf="item.bFirstPrizeStatus==2">
+          </td>
+          <td>
+            <img src="assets/img/red.png" class="icon" *ngIf="item.bSecondPrizeStatus==0">
+            <img src="assets/img/blue.png" class="icon" *ngIf="item.bSecondPrizeStatus==1">
+            <img src="assets/img/ban.png" class="icon" *ngIf="item.bSecondPrizeStatus==2">
+          </td>
+          <td>
+            <img src="assets/img/red.png" class="icon" *ngIf="item.bOtherPrizeStatus==0">
+            <img src="assets/img/blue.png" class="icon" *ngIf="item.bOtherPrizeStatus==1">
+            <img src="assets/img/ban.png" class="icon" *ngIf="item.bOtherPrizeStatus==2">
+          </td>
+          <td>
+            <img src="assets/img/red.png" class="icon" *ngIf="item.aFirstPrizeStatus==0">
+            <img src="assets/img/blue.png" class="icon" *ngIf="item.aFirstPrizeStatus==1">
+            <img src="assets/img/ban.png" class="icon" *ngIf="item.aFirstPrizeStatus==2">
+          </td>
+          <td>
+            <img src="assets/img/red.png" class="icon" *ngIf="item.aSecondPrizeStatus==0">
+            <img src="assets/img/blue.png" class="icon" *ngIf="item.aSecondPrizeStatus==1">
+            <img src="assets/img/ban.png" class="icon" *ngIf="item.aSecondPrizeStatus==2">
+          </td>
+          <td>
+            <img src="assets/img/red.png" class="icon" *ngIf="item.aOtherPrizeStatus==0">
+            <img src="assets/img/blue.png" class="icon" *ngIf="item.aOtherPrizeStatus==1">
+            <img src="assets/img/ban.png" class="icon" *ngIf="item.aOtherPrizeStatus==2">
+          </td>
+          <td>
+            <a mat-button color="primary" [routerLink]="['details/'+item.id]">操作</a>
+
+          </td>
+          <td>
+            <img src="assets/img/flag.png" class="icon" *ngIf="item.remark">
+          </td>
+        </tr>
+        <tr *ngIf="loading">
+          <td colspan="14">
+            <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate"></mat-progress-spinner>
+          </td>
+        </tr>
+        <tr *ngIf="data.length==0&&!loading">
+          <td colspan="14">
+            暂无数据
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [length]="dataLength" (page)="pageEvent($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
