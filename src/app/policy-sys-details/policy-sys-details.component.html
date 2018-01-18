@@ -1,0 +1,47 @@
+<div mat-dialog-title>
+  政策详情
+</div>
+
+
+<div mat-dialog-content>
+  <!-- <div class="row">
+    <label>政策类型：</label>
+    <p>{{data.name}}</p>
+  </div> -->
+  <div class="row">
+    <label>政策编号</label>
+    <p>{{data.code}}</p>
+  </div>
+  <div class="row">
+    <label>政策名称</label>
+    <p>{{data.name}}</p>
+  </div>
+  <div class="row">
+    <label>所属业务</label>
+    <p>{{data.businessName}}</p>
+  </div>
+  <div class="row">
+    <label>推荐人奖励</label>
+    <p>首笔奖励：{{data.aFirstPrize||'--'}}，二笔奖励：{{data.aSecondPrize||'--'}}，其他奖励：{{data.aOtherPrize||'--'}}</p>
+  </div>
+  <div class="row">
+    <label>被推荐人奖励</label>
+    <p>首笔奖励：{{data.bFirstPrize||'--'}}，二笔奖励：{{data.bSecondPrize||'--'}}，其他奖励：{{data.bOtherPrize||'--'}}</p>
+  </div>
+  <div class="row">
+    <label>负责人</label>
+    <p>{{data.leaderName}}</p>
+  </div>
+  <div class="row">
+      <label>描述</label>
+      <p>{{data.description}}</p>
+    </div>
+  <div class="row">
+    <label>备注</label>
+    <p>{{data.remark}}</p>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button  [mat-dialog-close]>关闭</button>
+  </div>

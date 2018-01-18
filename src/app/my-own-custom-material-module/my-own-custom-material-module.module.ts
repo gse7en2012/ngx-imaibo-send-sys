@@ -21,6 +21,7 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatListModule,
+  MatRadioModule,
 } from '@angular/material';
 
 
@@ -45,7 +46,8 @@ import {
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
   exports: [
     MatButtonModule,
@@ -66,7 +68,8 @@ import {
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
   declarations: []
 })

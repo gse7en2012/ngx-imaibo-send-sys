@@ -29,7 +29,7 @@
         <mat-form-field class="field-item" style="width:180px;">
           <mat-select placeholder="负责人" [(ngModel)]="policyHolder">
             <!-- <mat-option>无</mat-option> -->
-            <mat-option [value]="item.id" *ngFor="let item of leader" >{{item.name}}</mat-option>
+            <mat-option [value]="item.id" *ngFor="let item of leader">{{item.name}}</mat-option>
             <!-- <mat-option value="0">全部</mat-option>
             <mat-option value="1">名称</mat-option> -->
           </mat-select>
@@ -37,7 +37,7 @@
 
         <button mat-raised-button color="primary" (click)="queryData()">搜索</button>
 
-        <button mat-raised-button color="accent" (click)="queryData()" class="new-policy-btn">新增政策</button>
+        <button mat-raised-button color="accent" (click)="openDialog()" class="new-policy-btn">新增政策</button>
 
 
       </div>
@@ -80,16 +80,18 @@
           <td>{{item.code}}</td>
           <td>{{item.name}}</td>
           <td>{{item.businessName}}</td>
-          <td>{{item.roles}}</td>
+          <td>
+            <span *ngFor="let role of item.roles">{{role}}</span>
+          </td>
           <td>{{item.bFirstPrize||'--'}} </td>
           <td>{{item.bSecondPrize||'--'}}</td>
-          <td>{{item.bOtherPrize||'--'}} </td>
+          <td>{{item.bOtherPrize?'有':'--'}} </td>
           <td>{{item.aFirstPrize||'--'}}</td>
           <td>{{item.aSecondPrize||'--'}} </td>
-          <td>{{item.aOtherPrize||'--'}}</td>
+          <td>{{item.aOtherPrize?'有':'--'}}</td>
           <td>{{item.leaderName}}</td>
           <td>
-            <a mat-button color="primary">查看详情</a>
+            <a mat-button color="primary" (click)="viewMore(item)">查看详情</a>
           </td>
         </tr>
         <tr *ngIf="loading">

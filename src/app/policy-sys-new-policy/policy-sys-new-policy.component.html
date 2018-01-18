@@ -1,0 +1,93 @@
+<div class="policy-sys-new-policy">
+  <mat-card class="example-card query-card">
+
+    <mat-card-content>
+
+      <div class="header-row">
+        添加新政策
+
+      </div>
+
+      <div class="example-container">
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="政策名称" maxlength="30" [(ngModel)]="policyName">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="负责人" [(ngModel)]="policyHolder">
+              <!-- <mat-option>无</mat-option> -->
+              <mat-option [value]="item.id" *ngFor="let item of leader">{{item.name}}</mat-option>
+              <!-- <mat-option value="0">全部</mat-option>
+                    <mat-option value="1">名称</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="政策编码（系统生成）" disabled [value]="code">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="所属业务" disabled [value]="businessCode.name">
+          </mat-form-field>
+        </div>
+
+        <div class="checkbox-block">
+          <label>推荐人角色的要求: </label>
+          <mat-checkbox [value]="role.id" *ngFor="let role of roleList;let i=index;" (change)="changeEmp(roleList,i)" [checked]="role.is_choose">{{role.name}}（{{role.code}}）</mat-checkbox>
+
+
+        </div>
+
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="用户首次奖励" type="number" class="example-right-align" [(ngModel)]="bFirstPrize">
+
+            <span matSuffix>元</span>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="用户二次奖励" type="number" [(ngModel)]="bSecondPrize">
+            <span matSuffix>元</span>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="用户其他奖励" [(ngModel)]="bOtherPrize">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="推荐人首笔奖励" type="number" [(ngModel)]="aFirstPrize">
+            <span matSuffix>元</span>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="推荐人二次奖励" type="number" [(ngModel)]="aSecondPrize">
+            <span matSuffix>元</span>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="推荐人其他奖励" [(ngModel)]="aOtherPrize">
+          </mat-form-field>
+        </div>
+
+
+
+
+        <div class="row">
+          <mat-form-field>
+            <textarea matInput placeholder="政策描述" rows="4" [(ngModel)]="description"></textarea>
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea matInput placeholder="备注" rows="4" [(ngModel)]="remark"></textarea>
+          </mat-form-field>
+        </div>
+
+
+        <div class="footer-row">
+          <a mat-raised-button color="basic" [routerLink]="['../']">返回</a>
+          <a mat-raised-button color="primary" (click)="addNewPolicy()">确定添加</a>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

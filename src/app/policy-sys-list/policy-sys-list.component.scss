@@ -101,3 +101,28 @@
 .new-policy-btn{
    margin-left: 10px;
 }
+
+// dialog
+
+
+.mat-dialog-title{
+    text-align: center;
+}
+.mat-dialog-actions{
+    display: flex;
+    margin-bottom: -4px;
+    .mat-button,.mat-raised-button{
+        flex:1;
+    }
+}
+
+.dialog-form{
+    padding: 20px 10px;
+    .mat-radio-group{
+        display: flex;
+        align-items: center;
+        .mat-radio-button{
+            flex: 1;
+        }
+    }
+}

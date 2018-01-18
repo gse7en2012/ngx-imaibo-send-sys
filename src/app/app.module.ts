@@ -19,7 +19,9 @@ import { DetailsComponent, DialogOverviewExampleDialog } from './send-sys-detail
 
 import { AuthGuard } from './auth-guard';
 import { ParentContainerComponent } from './parent-container/parent-container.component';
-import { PolicySysListComponent } from './policy-sys-list/policy-sys-list.component';
+import { PolicySysListComponent, DialogPolicyExampleDialog } from './policy-sys-list/policy-sys-list.component';
+import { PolicySysNewPolicyComponent } from './policy-sys-new-policy/policy-sys-new-policy.component';
+import { PolicySysDetailsComponent } from './policy-sys-details/policy-sys-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +35,7 @@ const adminRoutes: Routes = [
       { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
       { path: 'search/details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
       { path: 'policy', component: PolicySysListComponent, canActivate: [AuthGuard] },
+      { path: 'policy/new_policy', component: PolicySysNewPolicyComponent, canActivate: [AuthGuard] },
     ]
   }
 ]
@@ -45,8 +48,11 @@ const adminRoutes: Routes = [
     SearchComponent,
     DetailsComponent,
     DialogOverviewExampleDialog,
+    DialogPolicyExampleDialog,
     ParentContainerComponent,
-    PolicySysListComponent
+    PolicySysListComponent,
+    PolicySysNewPolicyComponent,
+    PolicySysDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,13 @@ const adminRoutes: Routes = [
     RouterModule.forChild(adminRoutes),
   ],
   providers: [AppService, AuthGuard],
-  entryComponents: [DetailsComponent, DialogOverviewExampleDialog],
+  entryComponents: [
+    DetailsComponent,
+    DialogOverviewExampleDialog,
+    PolicySysListComponent,
+    DialogPolicyExampleDialog,
+    PolicySysDetailsComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,14 +19,18 @@ export class AppService {
 
   private serviceUrl = {
     'login': '/ydt/api/bps/user/signIn',
-    'query':'/ydt/api/bps/quotaPrize/record',
-    'details':'/ydt/api/bps/quotaPrize/detail',
-    'remark':'/ydt/api/bps/quotaPrize/saveRemark',
-    'award':'/ydt/api/bps/quotaPrize/confirm',
+    'query': '/ydt/api/bps/quotaPrize/record',
+    'details': '/ydt/api/bps/quotaPrize/detail',
+    'remark': '/ydt/api/bps/quotaPrize/saveRemark',
+    'award': '/ydt/api/bps/quotaPrize/confirm',
 
-    'policyList':'/ydt/api/bps/policy/findPolicy',
-    'policyLeader':'/ydt/api/bps/user/findLeader'
+    'policyList': '/ydt/api/bps/policy/findPolicy',
+    'policyLeader': '/ydt/api/bps/user/findLeader',
 
+    'roleList': '/ydt/api/bps/roleUser/findRole',
+    'generatePolicyCode': '/ydt/api/bps/policy/generatePolicyCode',
+    'getBusinessCode':'/ydt/api/bps/business/findBusinessType',
+    'addPolicy': '/ydt/api/bps/policy/addPolicy',
   };
 
 
@@ -45,17 +49,17 @@ export class AppService {
       'content-type': 'application/x-www-form-urlencoded'
     });
     const options = new RequestOptions({ headers: headers });
-    const postData = Object.keys(opts).map((k)=>{
+    const postData = Object.keys(opts).map((k) => {
       return `${k}=${opts[k]}`;
     }).join('&');
     return {
-      data:postData,
-      opts:options
+      data: postData,
+      opts: options
     }
   }
 
 
-  gsevenRequestViaGet(target, opts) {
+  gsevenRequestViaGet(target, opts?) {
     const uri = this.serviceUrl[target];
     const param = this.generateHttpGetSearchParams(opts);
     return this.http.get(`${uri}`, { search: param.search }).map(res => res.json()).toPromise()
@@ -81,7 +85,7 @@ export class AppService {
   }
   gsevenRequestViaPost(target, opts) {
     const postData = this.generateHttpPostSearchParams(opts);
-    return this.http.post(this.serviceUrl[target], postData.data,postData.opts).map(res => res.json()).toPromise()
+    return this.http.post(this.serviceUrl[target], postData.data, postData.opts).map(res => res.json()).toPromise()
       .then((data) => {
         if (data.statusCode === '200') {
           return data;
@@ -110,37 +114,52 @@ export class AppService {
     })
   }
 
-  checkIsLogin(){
+  checkIsLogin() {
     return this.cookieService.get('BPSUSERTOKEN')
   }
 
-  saveRemark(id,remark){
-    return this.gsevenRequestViaPost('remark',{
-      id:id,
-      remark:remark
+  saveRemark(id, remark) {
+    return this.gsevenRequestViaPost('remark', {
+      id: id,
+      remark: remark
     })
   }
 
-  queryData(queryOpts){
-    return this.gsevenRequestViaGet('query',queryOpts)
+  queryData(queryOpts) {
+    return this.gsevenRequestViaGet('query', queryOpts)
   }
 
-  getSendDetails(id){
-    return this.gsevenRequestViaGet('details',{id:id});
+  getSendDetails(id) {
+    return this.gsevenRequestViaGet('details', { id: id });
   }
 
-  postExecuteAward(opts){
-    return this.gsevenRequestViaPost('award',opts);
-  }
-
-
-  getPolicyList(opts){
-    return this.gsevenRequestViaGet('policyList',opts)
+  postExecuteAward(opts) {
+    return this.gsevenRequestViaPost('award', opts);
   }
 
 
-  getPolicyLeader(){
-    return this.gsevenRequestViaGet('policyLeader',{})
-    
+  getPolicyList(opts) {
+    return this.gsevenRequestViaGet('policyList', opts)
+  }
+
+
+  getPolicyLeader() {
+    return this.gsevenRequestViaGet('policyLeader', {})
+  }
+
+  getRoleList(opts?) {
+    return this.gsevenRequestViaGet('roleList', opts)
+  }
+
+  generatePolicyCode(type) {
+    return this.gsevenRequestViaPost('generatePolicyCode', { type: type })
+  }
+
+  addPolicy(opts) {
+    return this.gsevenRequestViaPost('addPolicy', opts);
+  }
+
+  getBusinessCode(){
+    return this.gsevenRequestViaGet('getBusinessCode',{});
   }
 }
