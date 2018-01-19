@@ -28,9 +28,19 @@ export class AppService {
     'policyLeader': '/ydt/api/bps/user/findLeader',
 
     'roleList': '/ydt/api/bps/roleUser/findRole',
+    'roleUserList': '/ydt/api/bps/roleUser/findRoleUser',
     'generatePolicyCode': '/ydt/api/bps/policy/generatePolicyCode',
-    'getBusinessCode':'/ydt/api/bps/business/findBusinessType',
+    'generateRoleCode': '/ydt/api/bps/roleUser/generateRoleCode',
+
+    'getBusinessCode': '/ydt/api/bps/business/findBusinessType',
     'addPolicy': '/ydt/api/bps/policy/addPolicy',
+    'addNewRole': '/ydt/api/bps/roleUser/addRole',
+
+    'getPolicyListViaRoleId': '/ydt/api/bps/roleUser/findRolePolicy',
+
+    'getRoleUserList': '/ydt/api/bps/roleUser/findUser',
+    'editUserRole': '/ydt/api/bps/roleUser/updateRoleUser',
+    'getUserRoleChangelog': '/ydt/api/bps/roleUser/roleUserModificationRecord'
   };
 
 
@@ -137,6 +147,10 @@ export class AppService {
     return this.gsevenRequestViaPost('award', opts);
   }
 
+  getUserRoleList(opts) {
+    return this.gsevenRequestViaGet('roleUserList', opts)
+  }
+
 
   getPolicyList(opts) {
     return this.gsevenRequestViaGet('policyList', opts)
@@ -154,12 +168,35 @@ export class AppService {
   generatePolicyCode(type) {
     return this.gsevenRequestViaPost('generatePolicyCode', { type: type })
   }
+  generateRoleCode(type) {
+    return this.gsevenRequestViaPost('generateRoleCode', { type: type })
+  }
 
   addPolicy(opts) {
     return this.gsevenRequestViaPost('addPolicy', opts);
   }
+  addNewRole(opts) {
+    return this.gsevenRequestViaPost('addNewRole', opts);
+  }
 
-  getBusinessCode(){
-    return this.gsevenRequestViaGet('getBusinessCode',{});
+  getBusinessCode() {
+    return this.gsevenRequestViaGet('getBusinessCode', {});
+  }
+
+  getPolicyListViaRoleId(rId) {
+    return this.gsevenRequestViaGet('getPolicyListViaRoleId', { roleId: rId })
+  }
+
+
+  getRoleUserList(opts) {
+    return this.gsevenRequestViaGet('getRoleUserList', opts)
+  }
+
+  editUserRole(opts) {
+    return this.gsevenRequestViaPost('editUserRole', opts)
+  }
+
+  getUserRoleChangeLog(uid) {
+    return this.gsevenRequestViaGet('getUserRoleChangelog', { mbUid: uid })
   }
 }

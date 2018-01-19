@@ -84,6 +84,8 @@ export class PolicySysNewPolicyComponent implements OnInit {
     }).then(()=>{
       alert('添加成功！');
       this.router.navigate(['../'],{relativeTo:this.route})
+    }).catch((e) => {
+      alert(e)
     })
   }
 

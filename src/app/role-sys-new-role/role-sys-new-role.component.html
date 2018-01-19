@@ -1,0 +1,44 @@
+<div class="role-sys-new-role">
+  <mat-card class="example-card query-card">
+
+    <mat-card-content>
+
+      <div class="header-row">
+        添加新角色
+      </div>
+
+      <div class="example-container">
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="角色编码（系统生成）" disabled [value]="code">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="角色名称" maxlength="30" [(ngModel)]="roleName">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="负责人" [(ngModel)]="policyHolder">
+              <mat-option [value]="item.id" *ngFor="let item of leader">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <div class="row">
+          <mat-form-field>
+            <textarea matInput placeholder="角色描述" rows="4" [(ngModel)]="description"></textarea>
+          </mat-form-field>
+
+
+        </div>
+
+
+        <div class="footer-row">
+          <a mat-raised-button color="basic" [routerLink]="['../']">返回</a>
+          <a mat-raised-button color="primary" (click)="addNewRole()">确定添加</a>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
