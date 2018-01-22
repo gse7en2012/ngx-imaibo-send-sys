@@ -17,9 +17,10 @@ let GLOBALROLE=[];
 export class RoleSysUserListComponent implements OnInit {
 
   dataSource = new MatTableDataSource<SingleData>();
-  data;
+  data=[];
   roleList;
   roleCode;
+  firstSearch=true;
 
   public loading: boolean = false;
   public status = '0';
@@ -52,7 +53,7 @@ export class RoleSysUserListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.queryData();
+    //this.queryData();
     this.getRoleList();
   }
 
@@ -74,6 +75,7 @@ export class RoleSysUserListComponent implements OnInit {
   }
 
   queryData() {
+    this.firstSearch=false;
     this.data = [];
     this.loading = true;
     const query: any = {

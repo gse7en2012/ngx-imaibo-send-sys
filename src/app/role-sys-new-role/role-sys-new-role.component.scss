@@ -65,3 +65,57 @@
         margin: 10px 20px 5px 0;
     }
 }
+
+
+.mat-dialog-content{
+    display: flex;
+    flex-direction: column;
+    max-height: 1000vh;
+    overflow: visible;
+    font-size: 15px;
+    .row{
+        display: flex;
+        margin: 5px;
+        line-height: 1.5;
+        label{
+            flex:0 0 130px;
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+            padding-right: 5px;
+        }
+        p{
+           
+            margin: 0;
+            text-align: left;
+            color: #666;
+        }
+    }
+}
+
+.mat-dialog-container{
+    box-sizing: border-box;
+
+}
+
+.mat-dialog-content .row .wei{
+    color: #673ab7;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    flex:1;
+}
+.mat-dialog-title{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.mat-dialog-actions{
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    .mat-button,.mat-raised-button{
+        flex:1
+    }
+}

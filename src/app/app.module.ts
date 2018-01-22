@@ -20,11 +20,11 @@ import { DetailsComponent, DialogOverviewExampleDialog } from './send-sys-detail
 import { AuthGuard } from './auth-guard';
 import { ParentContainerComponent } from './parent-container/parent-container.component';
 import { PolicySysListComponent, DialogPolicyExampleDialog } from './policy-sys-list/policy-sys-list.component';
-import { PolicySysNewPolicyComponent } from './policy-sys-new-policy/policy-sys-new-policy.component';
+import { PolicySysNewPolicyComponent, PolicySysNewPolicyDialog } from './policy-sys-new-policy/policy-sys-new-policy.component';
 import { PolicySysDetailsComponent } from './policy-sys-details/policy-sys-details.component';
 import { RoleSysListComponent, DialogRoleExampleDialog, DialogRolePolicyListDialog } from './role-sys-list/role-sys-list.component';
 import { RoleSysSwitchComponent } from './role-sys-switch/role-sys-switch.component';
-import { RoleSysNewRoleComponent } from './role-sys-new-role/role-sys-new-role.component';
+import { RoleSysNewRoleComponent, RoleSysNewRoleDialog } from './role-sys-new-role/role-sys-new-role.component';
 import { RoleSysUserListComponent, DialogRoleUserChangelogDialog, DialogRoleUserChangeDialog } from './role-sys-user-list/role-sys-user-list.component';
 
 const routes: Routes = [
@@ -72,7 +72,9 @@ const adminRoutes: Routes = [
     RoleSysListComponent,
     RoleSysSwitchComponent,
     RoleSysNewRoleComponent,
-    RoleSysUserListComponent
+    RoleSysUserListComponent,
+    RoleSysNewRoleDialog,
+    PolicySysNewPolicyDialog
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,11 @@ const adminRoutes: Routes = [
     PolicySysListComponent,
     DialogPolicyExampleDialog,
     PolicySysDetailsComponent,
-    DialogRoleExampleDialog
+    DialogRoleExampleDialog,
+    RoleSysNewRoleComponent,
+    RoleSysNewRoleDialog,
+    PolicySysNewPolicyComponent,
+    PolicySysNewPolicyDialog
   ],
   bootstrap: [AppComponent]
 })

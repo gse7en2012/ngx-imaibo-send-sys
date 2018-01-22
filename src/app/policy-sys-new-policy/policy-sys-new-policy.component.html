@@ -11,7 +11,7 @@
       <div class="example-container">
         <div class="row">
           <mat-form-field>
-            <input matInput placeholder="政策名称" maxlength="30" [(ngModel)]="policyName">
+            <input matInput placeholder="政策名称（30字以内）" maxlength="30" [(ngModel)]="policyName">
           </mat-form-field>
           <mat-form-field>
             <mat-select placeholder="负责人" [(ngModel)]="policyHolder">
@@ -32,9 +32,17 @@
         </div>
 
         <div class="checkbox-block">
-          <label>推荐人角色的要求: </label>
-          <mat-checkbox [value]="role.id" *ngFor="let role of roleList;let i=index;" (change)="changeEmp(roleList,i)" [checked]="role.is_choose">{{role.name}}（{{role.code}}）</mat-checkbox>
-
+          <label>推荐人角色的要求:<span class="tips"> (“已使用”表示该角色类型已被其他政策使用，如果勾选将自动覆盖之前的政策所选角色「仅限于代理商政策」)</span></label>
+          <div class="role-box">
+            <p class="title">代理商角色：</p>
+            <mat-checkbox [value]="role.code" *ngFor="let role of partnerRoleList;let i=index;" (change)="changeEmp(partnerRoleList,i)" [checked]="role.is_choose">
+              {{role.role}}（{{role.code}}）<span *ngIf="role.isUse==1" >已使用</span>
+            </mat-checkbox>
+          </div>
+          <div class="role-box">
+            <p class="title">其他角色：</p>
+            <mat-checkbox [value]="role.code" *ngFor="let role of otherRoleList;let i=index;" (change)="changeEmp(otherRoleList,i)" [checked]="role.is_choose">{{role.role}}（{{role.code}}）</mat-checkbox>
+          </div>
 
         </div>
 
@@ -72,7 +80,7 @@
 
         <div class="row">
           <mat-form-field>
-            <textarea matInput placeholder="政策描述" rows="4" [(ngModel)]="description"></textarea>
+            <textarea matInput placeholder="政策描述（200字以内）" rows="4" [(ngModel)]="description" maxlength="200"></textarea>
           </mat-form-field>
 
           <mat-form-field>
@@ -83,7 +91,7 @@
 
         <div class="footer-row">
           <a mat-raised-button color="basic" [routerLink]="['../']">返回</a>
-          <a mat-raised-button color="primary" (click)="addNewPolicy()">确定添加</a>
+          <a mat-raised-button color="primary" (click)="openDialog()">添加</a>
         </div>
 
       </div>

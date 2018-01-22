@@ -1,0 +1,31 @@
+<div mat-dialog-title>
+  添加确认
+</div>
+
+
+<div mat-dialog-content>
+  <div class="row">
+    <p class="wei">添加角色类型：{{data.roleType}}</p>
+  </div>
+  <div class="row">
+    <label>角色编号</label>
+    <p>{{data.roleCode}}</p>
+  </div>
+  <div class="row">
+    <label>角色名称</label>
+    <p>{{data.roleName}}</p>
+  </div>
+  <div class="row">
+    <label>负责人</label>
+    <p>{{data.leader}}</p>
+  </div>
+  <div class="row">
+    <label>角色描述</label>
+    <p>{{data.roleDes}}</p>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>返回修改</button>
+  <button mat-raised-button (click)="addNewRole()" color="primary">确定</button>
+</div>

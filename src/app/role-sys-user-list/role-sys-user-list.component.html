@@ -70,7 +70,12 @@
             <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate"></mat-progress-spinner>
           </td>
         </tr>
-        <tr *ngIf="data.length==0&&!loading">
+        <tr *ngIf="firstSearch">
+          <td colspan="6">
+            请输入相关信息查询修改
+          </td>
+        </tr>
+        <tr *ngIf="data.length==0&&!loading&&!firstSearch">
           <td colspan="6">
             暂无数据
           </td>

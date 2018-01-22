@@ -35,7 +35,7 @@ export class AppService {
     'getBusinessCode': '/ydt/api/bps/business/findBusinessType',
     'addPolicy': '/ydt/api/bps/policy/addPolicy',
     'addNewRole': '/ydt/api/bps/roleUser/addRole',
-
+    'findRoleType': '/ydt/api/bps/roleUser/findRoleType',
     'getPolicyListViaRoleId': '/ydt/api/bps/roleUser/findRolePolicy',
 
     'getRoleUserList': '/ydt/api/bps/roleUser/findUser',
@@ -198,5 +198,9 @@ export class AppService {
 
   getUserRoleChangeLog(uid) {
     return this.gsevenRequestViaGet('getUserRoleChangelog', { mbUid: uid })
+  }
+
+  findRoleType(){
+    return this.gsevenRequestViaGet('findRoleType',{});
   }
 }
