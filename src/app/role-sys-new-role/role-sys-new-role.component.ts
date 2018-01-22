@@ -61,7 +61,7 @@ export class RoleSysNewRoleComponent implements OnInit {
     let dialogRef = this.dialog.open(RoleSysNewRoleDialog, {
       width: '440px',
       data: {
-        roleDes: this.description,
+        roleDes: this.description || '',
         leader: this.policyHolder,
         roleCode: this.code,
         roleName: this.roleName,
@@ -71,6 +71,7 @@ export class RoleSysNewRoleComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
+      if (result.nav) this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
 
@@ -103,8 +104,8 @@ export class RoleSysNewRoleDialog {
       roleName: this.data.roleName
     }).then(() => {
       alert('添加成功！');
-      this.dialogRef.close();
-      this.router.navigate(['../'], { relativeTo: this.route })
+      this.dialogRef.close({ nav: true });
+
     }).catch((e) => {
       alert(e)
     })

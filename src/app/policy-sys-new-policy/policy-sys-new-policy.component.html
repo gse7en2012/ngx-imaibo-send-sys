@@ -11,12 +11,12 @@
       <div class="example-container">
         <div class="row">
           <mat-form-field>
-            <input matInput placeholder="政策名称（30字以内）" maxlength="30" [(ngModel)]="policyName">
+            <input matInput placeholder="政策名称（30字以内）" maxlength="29" [(ngModel)]="policyName">
           </mat-form-field>
           <mat-form-field>
             <mat-select placeholder="负责人" [(ngModel)]="policyHolder">
               <!-- <mat-option>无</mat-option> -->
-              <mat-option [value]="item.id" *ngFor="let item of leader">{{item.name}}</mat-option>
+              <mat-option [value]="item" *ngFor="let item of leader">{{item.name}}</mat-option>
               <!-- <mat-option value="0">全部</mat-option>
                     <mat-option value="1">名称</mat-option> -->
             </mat-select>
@@ -80,7 +80,7 @@
 
         <div class="row">
           <mat-form-field>
-            <textarea matInput placeholder="政策描述（200字以内）" rows="4" [(ngModel)]="description" maxlength="200"></textarea>
+            <textarea matInput placeholder="政策描述（200字以内）" rows="4" [(ngModel)]="description" maxlength="199"></textarea>
           </mat-form-field>
 
           <mat-form-field>

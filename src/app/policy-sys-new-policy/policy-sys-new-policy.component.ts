@@ -33,7 +33,7 @@ export class PolicySysNewPolicyComponent implements OnInit {
 
 
   policyType;
-  constructor(private appService: AppService, private route: ActivatedRoute, private router: Router,public dialog: MatDialog,) { }
+  constructor(private appService: AppService, private route: ActivatedRoute, private router: Router, public dialog: MatDialog, ) { }
 
   ngOnInit() {
 
@@ -41,7 +41,7 @@ export class PolicySysNewPolicyComponent implements OnInit {
     this.getPolicyLeader();
 
     this.route.queryParams.subscribe((qs) => {
-      this.policyType=qs.policyType;
+      this.policyType = qs.policyType;
       this.appService.generatePolicyCode(qs.policyType).then((data) => {
         this.code = data.code;
       })
@@ -74,7 +74,7 @@ export class PolicySysNewPolicyComponent implements OnInit {
 
   // addNewPolicy() {
   //   this.appService.addPolicy({
-    
+
   //     aFirstPrize: this.aFirstPrize || '',
   //     aOtherPrize: this.aOtherPrize || '',
   //     aSecondPrize: this.aSecondPrize || '',
@@ -103,7 +103,7 @@ export class PolicySysNewPolicyComponent implements OnInit {
     let dialogRef = this.dialog.open(PolicySysNewPolicyDialog, {
       width: '550px',
       data: {
-        policyType:this.policyType=='0'?'其他政策':'代理商政策',
+        policyType: this.policyType == '0' ? '其他政策' : '代理商政策',
         aFirstPrize: this.aFirstPrize || '',
         aOtherPrize: this.aOtherPrize || '',
         aSecondPrize: this.aSecondPrize || '',
@@ -111,9 +111,10 @@ export class PolicySysNewPolicyComponent implements OnInit {
         bOtherPrize: this.bOtherPrize || '',
         bSecondPrize: this.bSecondPrize || '',
         businessCode: this.businessCode.code,
-        businessName:this.businessCode.name,
+        businessName: this.businessCode.name,
         description: this.description,
-        leader: this.policyHolder,
+        leader: this.policyHolder.id,
+        leaderName: this.policyHolder.name,
         policyCode: this.code,
         policyName: this.policyName,
         remark: this.remark,
@@ -126,6 +127,7 @@ export class PolicySysNewPolicyComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
+      if (result.nav) this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
 
@@ -153,6 +155,9 @@ export class PolicySysNewPolicyDialog {
   }
 
   addNewPolicy() {
+    // return this.dialogRef.close({ nav: true });
+    // return  this.router.navigate(['../'], { relativeTo: this.route });
+
     this.appService.addPolicy({
       aFirstPrize: this.data.aFirstPrize || '',
       aOtherPrize: this.data.aOtherPrize || '',
@@ -161,17 +166,16 @@ export class PolicySysNewPolicyDialog {
       bOtherPrize: this.data.bOtherPrize || '',
       bSecondPrize: this.data.bSecondPrize || '',
       businessCode: this.data.businessCode,
-      description: this.data.description,
+      description: this.data.description || '',
       leader: this.data.leader,
-      businessName:this.data.businessName,
+      businessName: this.data.businessName,
       policyCode: this.data.policyCode,
       policyName: this.data.policyName,
-      remark: this.data.remark,
+      remark: this.data.remark || '',
       roleCodes: this.data.roleCodes
     }).then(() => {
       alert('添加成功！');
-      this.dialogRef.close();
-      this.router.navigate(['../'], { relativeTo: this.route })
+      this.dialogRef.close({ nav: true });
     }).catch((e) => {
       alert(e)
     })

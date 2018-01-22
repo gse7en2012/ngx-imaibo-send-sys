@@ -102,10 +102,10 @@ export class SearchComponent implements OnInit {
     this.info={
       aDenominator:result.aDenominator,
       aMolecule:result.aMolecule,
-      bDenominator:result.aMolecule,
-      bMolecule:result.aMolecule,
-      cDenominator:result.aMolecule,
-      cMolecule:result.aMolecule
+      bDenominator:result.bMolecule,
+      bMolecule:result.bMolecule,
+      cDenominator:result.cMolecule,
+      cMolecule:result.cMolecule
     }
   }
   queryUserData(){
