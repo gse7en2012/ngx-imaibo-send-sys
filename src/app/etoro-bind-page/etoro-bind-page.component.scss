@@ -1,0 +1,172 @@
+//gseven css
+.example-container {
+  // display: flex;
+  // flex-direction: column;
+  margin: 30px 0;
+  overflow: hidden;
+
+  .mat-form-field {
+    // flex: 1;
+    margin: 10px;
+    width: 120px;
+  }
+
+  .mat-form-field,
+  .checkbox-block {
+    // width: 44%;
+    // float: left;
+    // margin: 5px 3%;
+    flex: 1;
+    margin: 12px 20px;
+    font-size: 15px;
+  }
+
+  .checkbox-block {
+    font-weight: 300;
+    color: #666;
+    min-height: 57px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+
+    .tips {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      flex: 0 0 100%;
+      margin-bottom: 10px;
+    }
+
+    .mat-checkbox {
+      margin: 0 15px 8px 0;
+      min-width: 270px;
+
+      span {
+        float: right;
+        font-size: 12px;
+        background: #ffd740;
+        color: #666;
+        padding: 2px 4px;
+        border-radius: 2px;
+        line-height: 16px;
+        margin-left: -5px;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.example-card {
+  margin: 15px auto;
+  padding: 15px;
+  margin-top: 50px;
+  font-size: 16px;
+}
+
+.header-row {
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  height: 46px;
+  line-height: 46px;
+
+  .mat-raised-button {
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+}
+
+.footer-row {
+  height: 60px;
+  padding-left: 20px;
+
+  .mat-raised-button {
+    margin: 10px 20px 5px 0;
+  }
+}
+
+.role-box {
+  border: 1px solid #fafafa;
+  padding: 10px;
+  background: #fafafa;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+
+  .title {
+    margin: 0 0 10px;
+    width: 100%;
+  }
+}
+
+
+
+
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  max-height: 1000vh;
+  overflow: visible;
+  font-size: 15px;
+
+  .row {
+    display: flex;
+    margin: 5px;
+    line-height: 1.5;
+
+    label {
+      flex: 0 0 130px;
+      text-align: left;
+      font-weight: bold;
+      color: #333;
+      padding-right: 5px;
+    }
+
+    p {
+
+      margin: 0;
+      text-align: left;
+      color: #666;
+    }
+  }
+}
+
+.mat-dialog-container {
+  box-sizing: border-box;
+
+}
+
+.mat-dialog-content .row .wei {
+  color: #673ab7;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  flex: 1;
+}
+
+.mat-dialog-title {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.mat-dialog-actions {
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+
+  .mat-button,
+  .mat-raised-button {
+    flex: 1
+  }
+}

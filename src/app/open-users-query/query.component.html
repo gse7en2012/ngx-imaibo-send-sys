@@ -1,0 +1,133 @@
+<div class="send-sys-search">
+  <mat-card class="example-card query-card">
+    <mat-card-content>
+      <div class="example-container bb">
+        <mat-form-field style="width:200px">
+          <input matInput [matDatepicker]="picker1" [(ngModel)]="start" placeholder="开始日期">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width:200px">
+          <input matInput [matDatepicker]="picker2" [(ngModel)]="end" placeholder="结束日期">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="field-item">
+          <mat-select placeholder="年" [(ngModel)]="year" (change)="changeYear()">
+            <mat-option>无</mat-option>
+            <mat-option [value]="y" *ngFor="let y of yearList">{{y}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="月" [(ngModel)]="month" (change)="changeMonth()">
+            <mat-option>无</mat-option>
+            <mat-option [value]="m" *ngFor="let m of monthList">{{m}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="日" [(ngModel)]="day" (openedChange)="openDaySelect()">
+            <mat-option>无</mat-option>
+            <mat-option [value]="d" *ngFor="let d of dayList">{{d}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <mat-form-field class="field-item">
+          <mat-select placeholder="政策" [(value)]="policyType">
+            <mat-option value="0">全部</mat-option>
+            <mat-option value="1">代理商政策</mat-option>
+            <mat-option value="2">其他政策</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="推荐人UID" [(ngModel)]="reUid">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="queryData()">按所选条件查询</button>
+        <br>
+        <mat-form-field class="field-item">
+          <mat-select placeholder="类别" [(value)]="userType">
+            <mat-option>无</mat-option>
+            <mat-option value="0">投资脉搏UID</mat-option>
+            <mat-option value="1">手机号码</mat-option>
+            <mat-option value="2">eToro用户名</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width:300px;">
+          <input matInput placeholder="关键字" [(ngModel)]="keyWord">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="queryUserData()">用户查询</button>
+        <button mat-raised-button  color="accent" (click)="bindEtoro()" style="margin-left: 20px;">+eToro账号绑定</button>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <mat-card class="example-card">
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+      <div class="example-container icon-box">
+        <!-- <label class="icon-item">
+          <img src="assets/img/red.png">未奖励</label>
+        <label class="icon-item">
+          <img src="assets/img/blue.png">奖励完毕</label>
+        <label class="icon-item">
+          <img src="assets/img/ban.png">取消奖励</label> -->
+
+        <a mat-raised-button color="primary" class="export-btn"
+          href="/ydt/api/bps/user/exportAccountOpeningList?{{exportQs}}">导出excel</a>
+      </div>
+
+      <mat-toolbar color="basic" class="result-title">
+        查询结果
+      </mat-toolbar>
+
+      <!-- <p style="padding: 10px;">序号进度： {{info.aMolecule}}/{{info.aDenominator}} 操作进度：
+        {{info.bMolecule}}/{{info.bDenominator}} 金额进度： {{info.cMolecule}}/{{info.cDenominator}}
+        （“其他奖励”“取消奖励”不统计）
+      </p> -->
+      <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+
+      <table class="table">
+        <tr class="header">
+          <td>序号</td>
+          <td>用户uid</td>
+          <td>用户昵称</td>
+          <td>手机号码</td>
+          <td>eToro用户名</td>
+          <td>开户时间</td>
+          <td>入金时间</td>
+          <td>推荐人uid</td>
+          <td>推荐人昵称</td>
+          <td>政策名称</td>
+        </tr>
+        <tr *ngFor="let item of data">
+          <td>{{item.id}}</td>
+          <td>{{item.mbUid}}</td>
+          <td>{{item.mbUname}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.username}}</td>
+          <td>{{item.registrationDate}}</td>
+          <td>{{item.firstPositionDate}}</td>
+          <td>{{item.aMbUid}}</td>
+          <td>{{item.aMbUname}}</td>
+          <td>{{item.policyName}}</td>
+        </tr>
+        <tr *ngIf="loading">
+          <td colspan="10">
+            <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate"></mat-progress-spinner>
+          </td>
+        </tr>
+        <tr *ngIf="data.length==0&&!loading">
+          <td colspan="10">
+            暂无数据
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [length]="dataLength"
+        (page)="pageEvent($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

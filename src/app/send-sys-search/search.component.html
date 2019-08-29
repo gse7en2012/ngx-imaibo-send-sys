@@ -49,6 +49,7 @@
             <mat-option>无</mat-option>
             <mat-option value="0">投资脉搏UID</mat-option>
             <mat-option value="1">手机号码</mat-option>
+            <mat-option value="2">eToro用户名</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
@@ -88,6 +89,9 @@
           <td rowspan="2">序号</td>
           <td rowspan="2">用户id</td>
           <td rowspan="2">昵称</td>
+          <td rowspan="2">手机</td>
+          <td rowspan="2">eToro用户名</td>
+          <td rowspan="2">推荐人脉搏昵称</td>
           <td rowspan="2">政策</td>
           <td rowspan="2">入金日期</td>
           <td rowspan="2">满$10日期</td>
@@ -108,6 +112,9 @@
           <td>{{item.id}}</td>
           <td>{{item.bMbUid}}</td>
           <td>{{item.mbNickName}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.username}}</td>
+          <td>{{item.aMbNickName}}</td>
           <td>{{item.policy}}</td>
           <td>{{item.firstPositionDate}}</td>
           <td>{{item.tendollarsQuotaDate}}</td>

@@ -40,7 +40,11 @@ export class AppService {
 
     'getRoleUserList': '/ydt/api/bps/roleUser/findUser',
     'editUserRole': '/ydt/api/bps/roleUser/updateRoleUser',
-    'getUserRoleChangelog': '/ydt/api/bps/roleUser/roleUserModificationRecord'
+    'getUserRoleChangelog': '/ydt/api/bps/roleUser/roleUserModificationRecord',
+    'getAccountOpenList':'/ydt/api/bps/user/findAccountOpeningList',
+
+    'getNickNameViaUid':'/ydt/api/bps/user/findUnameByUid',
+    'postBindBps':'/ydt/api/bps/user/bindBps'
   };
 
 
@@ -139,6 +143,10 @@ export class AppService {
     return this.gsevenRequestViaGet('query', queryOpts)
   }
 
+  getAccountOpenList(opts){
+    return this.gsevenRequestViaGet('getAccountOpenList',opts);
+  }
+
   getSendDetails(id) {
     return this.gsevenRequestViaGet('details', { id: id });
   }
@@ -202,5 +210,13 @@ export class AppService {
 
   findRoleType(){
     return this.gsevenRequestViaGet('findRoleType',{});
+  }
+
+  getNickNameViaUid(uid){
+    return this.gsevenRequestViaGet('getNickNameViaUid',{uid:uid})
+  }
+
+  postBindBps(opts){
+    return this.gsevenRequestViaPost('editUserRole', opts)
   }
 }

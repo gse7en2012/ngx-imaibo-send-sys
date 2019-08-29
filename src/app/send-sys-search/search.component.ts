@@ -19,9 +19,11 @@ export class SearchComponent implements OnInit {
   data;
 
 
-  public year = (new Date()).getFullYear();
+  // public year = (new Date()).getFullYear();
+  public year;
   public loading:boolean=false;
-  public month=((new Date()).getMonth()+1)<10?'0'+((new Date()).getMonth()+1):''+((new Date()).getMonth()+1);
+  // public month=((new Date()).getMonth()+1)<10?'0'+((new Date()).getMonth()+1):''+((new Date()).getMonth()+1);
+  public month;
   public day;
   public isLeapYear: boolean = false;
   public status = '0';
@@ -30,7 +32,7 @@ export class SearchComponent implements OnInit {
   public keyWord:any='';
   public page = 0;
   public pageSize = 10;
-  public type = '0';
+  public type = '1';
   public dataLength=0;
   public info:any={};
 
@@ -102,9 +104,9 @@ export class SearchComponent implements OnInit {
     this.info={
       aDenominator:result.aDenominator,
       aMolecule:result.aMolecule,
-      bDenominator:result.bMolecule,
+      bDenominator:result.bDenominator,
       bMolecule:result.bMolecule,
-      cDenominator:result.cMolecule,
+      cDenominator:result.cDenominator,
       cMolecule:result.cMolecule
     }
   }

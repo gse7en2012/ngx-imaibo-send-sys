@@ -23,6 +23,8 @@ import {
   MatListModule,
   MatRadioModule,
   MatTabsModule,
+  MatNativeDateModule,
+  MatDatepickerModule
 } from '@angular/material';
 
 
@@ -49,7 +51,9 @@ import {
     MatIconModule,
     MatListModule,
     MatRadioModule,
-    MatTabsModule
+    MatTabsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   exports: [
     MatButtonModule,
@@ -72,7 +76,9 @@ import {
     MatIconModule,
     MatListModule,
     MatRadioModule,
-    MatTabsModule
+    MatTabsModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   declarations: []
 })

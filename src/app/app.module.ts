@@ -14,6 +14,7 @@ import { AppService } from './service/app.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { QueryComponent } from './open-users-query/query.component';
 import { SearchComponent } from './send-sys-search/search.component';
 import { DetailsComponent, DialogOverviewExampleDialog } from './send-sys-details/details.component';
 
@@ -21,6 +22,7 @@ import { AuthGuard } from './auth-guard';
 import { ParentContainerComponent } from './parent-container/parent-container.component';
 import { PolicySysListComponent, DialogPolicyExampleDialog } from './policy-sys-list/policy-sys-list.component';
 import { PolicySysNewPolicyComponent, PolicySysNewPolicyDialog } from './policy-sys-new-policy/policy-sys-new-policy.component';
+import { EtoroBindComponent } from './etoro-bind-page/etoro-bind-page.component';
 import { PolicySysDetailsComponent } from './policy-sys-details/policy-sys-details.component';
 import { RoleSysListComponent, DialogRoleExampleDialog, DialogRolePolicyListDialog } from './role-sys-list/role-sys-list.component';
 import { RoleSysSwitchComponent } from './role-sys-switch/role-sys-switch.component';
@@ -36,10 +38,13 @@ const adminRoutes: Routes = [
   {
     path: 'admin', component: ParentContainerComponent, children: [
       { path: '', redirectTo: 'search', pathMatch: 'full' },
+      { path: 'open', component: QueryComponent, canActivate: [AuthGuard] },
+      { path: 'open/bind', component: EtoroBindComponent, canActivate: [AuthGuard] },
       { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
       { path: 'search/details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
       { path: 'policy', component: PolicySysListComponent, canActivate: [AuthGuard] },
       { path: 'policy/new_policy', component: PolicySysNewPolicyComponent, canActivate: [AuthGuard] },
+      { path: 'zhengce', component: PolicySysListComponent, canActivate: [AuthGuard] },
       {
         path: 'role', component: RoleSysSwitchComponent, children: [
           { path: '', redirectTo: 'users', pathMatch: 'full' },
@@ -58,6 +63,7 @@ const adminRoutes: Routes = [
     AppComponent,
     LoginComponent,
     SearchComponent,
+    QueryComponent,
     DetailsComponent,
     DialogOverviewExampleDialog,
     DialogPolicyExampleDialog,
@@ -74,7 +80,8 @@ const adminRoutes: Routes = [
     RoleSysNewRoleComponent,
     RoleSysUserListComponent,
     RoleSysNewRoleDialog,
-    PolicySysNewPolicyDialog
+    PolicySysNewPolicyDialog,
+    EtoroBindComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +90,7 @@ const adminRoutes: Routes = [
     FlexLayoutModule,
     HttpModule,
     FormsModule,
+
     ReactiveFormsModule,
     CookieModule.forRoot(),
     RouterModule.forRoot(routes),

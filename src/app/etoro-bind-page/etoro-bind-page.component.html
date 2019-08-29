@@ -1,0 +1,57 @@
+<div class="etoro-bind">
+  <mat-card class="example-card query-card">
+
+    <mat-card-content>
+
+      <div class="header-row">
+        eToro账号绑定
+      </div>
+
+      <div class="example-container">
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="eToro用户名（请准确填写用户名，否则将绑定错误账号）" [(ngModel)]="etoroName">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="field-item" style="width: 200px;flex: none;">
+            <mat-select placeholder="绑定脉搏账号" [(value)]="maiboType">
+              <mat-option [value]="0">选择uid绑定</mat-option>
+              <mat-option [value]="1">生成uid绑定</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="field-item" style="width:180px;" *ngIf="maiboType==0">
+            <input matInput placeholder="UID" [(ngModel)]="maiboUid">
+          </mat-form-field>
+          <div class="field-item" *ngIf="maiboType==0">
+            <button mat-raised-button color="primary" (click)="getNickname()" style="margin-top: 15px;">搜索</button>
+          </div>
+
+          <mat-form-field class="field-item" *ngIf="maiboType==0">
+            <input matInput placeholder="昵称" [(ngModel)]="maiboNickname" disabled>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="maiboType==1">
+            <input matInput placeholder="说明：生成uid绑定，将自动生成游客账号，如需修改绑定的脉搏账号，请在投资脉搏管理后台修改信息" disabled>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field>
+            <input matInput placeholder="推荐人uid（推荐人的脉搏uid,必填）" [(ngModel)]="iUid">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="政策编号（业务渠道的政策,必填）" [(ngModel)]="policyCode">
+          </mat-form-field>
+        </div>
+
+
+        <div class="footer-row">
+          <a mat-raised-button color="basic" [routerLink]="['../']">返回</a>
+          <a mat-raised-button color="primary" (click)="bindBps()">新增</a>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
